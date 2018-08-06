@@ -157,6 +157,8 @@
   <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
   <script type="text/javascript">
 
+
+
     // click handlers
     document.getElementById('requestSession').onclick = function () {
       chrome.cast.requestSession(sessionListener, onErr);
@@ -209,13 +211,15 @@
 
     function onSuccess(msg) {
       console.log('Sucess: ' + msg);
+
+      
     }
 
     function sessionListener(newSession) {
       console.log('New session ID:' + newSession.sessionId);
 
       console.log("HEREEEEEEEEEEEEEEEEEEEEE");
-      console.log(session);
+      console.log(newSession);
 
       session = newSession;
       session.addUpdateListener(sessionUpdateListener);
