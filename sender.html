@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>URL Cast Demo</title>
 
   <style type="text/css">
-    html, body {height:100%; width: 100%; margin: 0; padding: 0; border: 0;}
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
 
     body {
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -22,9 +30,14 @@
       margin: auto;
     }
 
-    h1 {margin: 0; font-size: 36px;}
+    h1 {
+      margin: 0;
+      font-size: 36px;
+    }
 
-    input, select, button {
+    input,
+    select,
+    button {
       border: 2px solid #CCC;
       border-radius: 5px;
       font-size: 25px;
@@ -33,8 +46,15 @@
       background: #FFF;
     }
 
-    input:focus, select:focus, button:focus {outline: none;}
-    input:focus, select:focus, button:active {
+    input:focus,
+    select:focus,
+    button:focus {
+      outline: none;
+    }
+
+    input:focus,
+    select:focus,
+    button:active {
       outline: none;
       border-color: #8ecaed;
       box-shadow: 0 0 5px #8ecaed;
@@ -49,7 +69,9 @@
       -moz-appearance: none;
     }
 
-    input[disabled], select[disabled], button[disabled] {
+    input[disabled],
+    select[disabled],
+    button[disabled] {
       background: #FAFAFA;
       cursor: not-allowed;
     }
@@ -62,10 +84,22 @@
       -moz-appearance: none;
     }
 
-    .complete, .complete a {text-decoration: line-through; color: #ccc;}
-    .notready {color: #ccc;}
+    .complete,
+    .complete a {
+      text-decoration: line-through;
+      color: #ccc;
+    }
 
-    #notifications {position: fixed; bottom: 0; right: 0;}
+    .notready {
+      color: #ccc;
+    }
+
+    #notifications {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+    }
+
     .notification {
       background: #222;
       color: #FFF;
@@ -93,7 +127,8 @@
 
     <p id="step2" class="notready">Step 2: Send url</p>
 
-    <input id="url" class="border" type="text" placeholder="e.g. http://example.com" size="30" value="https://www.windytv.com/" disabled/>
+    <input id="url" class="border" type="text" placeholder="e.g. http://example.com" size="30" value="https://www.windytv.com/"
+      disabled/>
     <select id="type" disabled>
       <option value="iframe">iframe</option>
       <option value="loc">location</option>
@@ -112,7 +147,9 @@
       Also, notice the chromecast viewport is 1280x720 and the default background is black before the receiver loads.
     </p>
 
-    <p><a href="#">&laquo; GitHub</a></p>
+    <p>
+      <a href="#">&laquo; GitHub</a>
+    </p>
   </div>
 
   <div id="notifications"></div>
@@ -121,26 +158,26 @@
   <script type="text/javascript">
 
     // click handlers
-    document.getElementById('requestSession').onclick = function() {
+    document.getElementById('requestSession').onclick = function () {
       chrome.cast.requestSession(sessionListener, onErr);
     };
 
-    document.getElementById('send').onclick = function() {
+    document.getElementById('send').onclick = function () {
       var url = document.getElementById('url').value
         , type = document.getElementById('type').value;
 
       if (!url || !type) return;
 
-      sendMessage({type: type, url: url});
+      sendMessage({ type: type, url: url });
     };
 
-    var applicationID = '5CB45E5A'
+    var applicationID = '5B797F56'
       , namespace = 'urn:x-cast:com.url.cast'
       , receiverDead = false
       , session = null;
 
     // initialize
-    window.__onGCastApiAvailable = function(loaded) {
+    window.__onGCastApiAvailable = function (loaded) {
       if (loaded) initializeCastApi();
     };
 
@@ -171,6 +208,10 @@
 
     function sessionListener(newSession) {
       console.log('New session ID:' + newSession.sessionId);
+
+      console.log("HEREEEEEEEEEEEEEEEEEEEEE");
+      console.log(session);
+
       session = newSession;
       session.addUpdateListener(sessionUpdateListener);
       session.addMessageListener(namespace, receiveMessage);
@@ -205,7 +246,7 @@
       session.sendMessage(
         namespace,
         msg,
-        function() {
+        function () {
           console.log('Message sent: ', msg);
           notify('Message sent: ' + JSON.stringify(msg));
         },
@@ -229,7 +270,7 @@
       el.appendChild(notice);
 
       // notice self destruct timer
-      setTimeout(function() {
+      setTimeout(function () {
         el.removeChild(notice);
       }, 5000);
     }
@@ -244,7 +285,7 @@
       el.appendChild(notice);
 
       // notice self destruct timer
-      setTimeout(function() {
+      setTimeout(function () {
         el.removeChild(notice);
       }, 5000);
     }
@@ -270,4 +311,5 @@
 
   </script>
 </body>
+
 </html>
