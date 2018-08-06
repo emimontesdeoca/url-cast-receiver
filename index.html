@@ -157,7 +157,7 @@
   <script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
   <script type="text/javascript">
 
-
+    enableInputs();
 
     // click handlers
     document.getElementById('requestSession').onclick = function () {
@@ -176,7 +176,41 @@
     var applicationID = '5B797F56'
       , namespace = 'urn:x-cast:com.url.cast'
       , receiverDead = false
-      , session = null;
+      , session = {
+        "sessionId": "b59f1754-fd13-48cd-b237-4952a69cade4",
+        "appId": "5B797F56",
+        "displayName": "url-cast-sender",
+        "statusText": "URL Cast ready...",
+        "receiver": {
+          "label": "rTflOUigItAIYPwoZZ87Uv5oK8yI.",
+          "friendlyName": "Sala de Juntas",
+          "capabilities": [
+            "video_out",
+            "audio_out"
+          ],
+          "volume": {
+            "controlType": "attenuation",
+            "level": 1,
+            "muted": false,
+            "stepInterval": 0.05000000074505806
+          },
+          "receiverType": "cast",
+          "isActiveInput": null,
+          "displayStatus": null
+        },
+        "senderApps": [],
+        "namespaces": [
+          {
+            "name": "urn:x-cast:com.google.cast.debugoverlay"
+          },
+          {
+            "name": "urn:x-cast:com.url.cast"
+          }
+        ],
+        "media": [],
+        "status": "connected",
+        "transportId": "b59f1754-fd13-48cd-b237-4952a69cade4"
+      };
 
     // initialize
     window.__onGCastApiAvailable = function (loaded) {
@@ -212,7 +246,7 @@
     function onSuccess(msg) {
       console.log('Sucess: ' + msg);
 
-      
+
     }
 
     function sessionListener(newSession) {
